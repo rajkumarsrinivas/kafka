@@ -1,0 +1,28 @@
+# sample consumer for test purpose.
+input {
+    kafka {
+        bootstrap_servers => "kfk-stg1:9097,kfk-stg2:9097,kfk-stg3:9097,kfk-stg4:9097"
+        ssl_keystore_location => "C:\\client.keystore.jks"
+        ssl_keystore_password => "<password>"
+        ssl_keystore_type => "JKS"
+        ssl_truststore_location => "C:\\client.truststore.jks"
+        ssl_truststore_password => "<password>"
+        ssl_truststore_type => "JKS"
+        security_protocol => "SSL"
+        topics => ["kafka11-test"]
+        group_id => "kafka11-test"
+        auto_offset_reset => "earliest"
+        consumer_threads => 5
+        decorate_events => false
+        codec => json {
+          charset => "UTF-8"
+        }
+    }
+}
+
+filter {
+}
+
+output {
+  stdout { codec => json }
+}
